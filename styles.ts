@@ -30,7 +30,9 @@ export const styles = StyleSheet.create({
     textDecorationLine: "line-through",
     color: theme.colorGrey,
   },
-
+  listEmptyContainer: {
+    alignItems: "center",
+  },
   completedButton: {
     backgroundColor: theme.colorGrey,
   },
@@ -50,6 +52,7 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colorWhite,
     borderWidth: 2,
     padding: 12,
+    marginTop: 12,
     marginHorizontal: 12,
     marginBottom: 12,
     fontSize: 18,

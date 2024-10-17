@@ -1,5 +1,5 @@
 
-import { ScrollView, TextInput } from 'react-native';
+import { FlatList, Text, TextInput, View } from 'react-native';
 import { styles } from '../styles';
 import { ShoppingListItem } from '../components/ShoppingListItem';
 import { useState } from 'react';
@@ -12,18 +12,12 @@ type ShoppingListItemsType = {
 
 }
 
-const initialValue: ShoppingListItemsType[] = [
 
-  { id: '1', name: 'Coffe' },
-  { id: '2', name: 'Tea' },
-  { id: '3', name: 'Milk ' },
-  { id: '4', name: 'Water' },
-] 
 
 export default function App() {
 
   const [text, setText] = useState('')
-  const [ShoppingList, setShoppingList] = useState<ShoppingListItemsType[]>(initialValue)
+  const [ShoppingList, setShoppingList] = useState<ShoppingListItemsType[]>([])
 
   const handleSubmit = () => {
     if (text) {
@@ -46,9 +40,15 @@ export default function App() {
   }
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contenteContainer} stickyHeaderIndices={[0]} >
-      <TextInput
 
+    <FlatList
+      data={ShoppingList}
+      style={styles.container}
+      contentContainerStyle={styles.contenteContainer}
+      stickyHeaderIndices={[0]}
+
+      ListHeaderComponent={
+        <TextInput
         style={styles.textInput}
         placeholder='Coffe etc ...'
         value={text}
@@ -56,18 +56,20 @@ export default function App() {
         returnKeyType='done'
         onSubmitEditing={handleSubmit}
       // keyboardType=''  you can add keyboard type 
+        />}
+      ListEmptyComponent={
+        <View style={styles.listEmptyContainer} >
+          <Text  > your shopping list is empty</Text>
+        </View>
+      }
+      renderItem={(item) => <ShoppingListItem name={item.item.name} />}
 
-      />
-
-      {ShoppingList.map((item) => {
-        return <ShoppingListItem name={item.name} key={item.id} />
-
-      })}
+    />
 
 
 
-    </ScrollView>
-  );
+
+  )
 }
 
 
