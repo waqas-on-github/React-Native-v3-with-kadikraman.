@@ -7,6 +7,7 @@ import { theme } from "../theme";
 export default function Layout() {
     return (
         <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorCerulean }}>
+
             <Tabs.Screen
                 name="index"
                 options={{
@@ -20,10 +21,12 @@ export default function Layout() {
                 name="counter"
                 options={{
                     title: "Counter",
+                    headerShown: false, 
                     tabBarIcon: ({ color, size }) => (
                         <AntDesign name="clockcircleo" size={size} color={color} />
                     ),
-                }}
+                }
+                }
             />
             <Tabs.Screen
                 name="idea"

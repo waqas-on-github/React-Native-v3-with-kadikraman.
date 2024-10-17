@@ -1,14 +1,9 @@
-
 import { Text, View, StyleSheet } from "react-native";
 
-export default function CounterScreen() {
-
-
-
+export default function HistoryScreen() {
     return (
         <View style={styles.container}>
-
-            <Text style={styles.text}>Counter</Text>
+            <Text style={styles.text}>History</Text>
         </View>
     );
 }
@@ -18,7 +13,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#fff",
     },
     text: {
         fontSize: 24,
