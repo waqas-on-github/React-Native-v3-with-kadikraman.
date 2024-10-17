@@ -5,9 +5,10 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colorWhite,
-    paddingTop: 12,
   },
-
+  contenteContainer: {
+    paddingBottom: 24,
+  },
   itemContainer: {
     borderBottomWidth: 1,
     borderBottomColor: theme.colorCerulean,
@@ -46,6 +47,7 @@ export const styles = StyleSheet.create({
   },
   textInput: {
     borderColor: theme.colorGreyLte,
+    backgroundColor: theme.colorWhite,
     borderWidth: 2,
     padding: 12,
     marginHorizontal: 12,

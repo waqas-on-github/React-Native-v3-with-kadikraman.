@@ -1,5 +1,5 @@
 
-import { TextInput, View } from 'react-native';
+import { ScrollView, TextInput } from 'react-native';
 import { styles } from '../styles';
 import { ShoppingListItem } from '../components/ShoppingListItem';
 import { useState } from 'react';
@@ -18,9 +18,6 @@ const initialValue: ShoppingListItemsType[] = [
   { id: '2', name: 'Tea' },
   { id: '3', name: 'Milk ' },
   { id: '4', name: 'Water' },
-
-
-
 ] 
 
 export default function App() {
@@ -43,12 +40,15 @@ export default function App() {
   }
 
 
+  const handleDelete = () => {
 
 
+  }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={styles.contenteContainer} stickyHeaderIndices={[0]} >
       <TextInput
+
         style={styles.textInput}
         placeholder='Coffe etc ...'
         value={text}
@@ -66,7 +66,7 @@ export default function App() {
 
 
 
-    </View>
+    </ScrollView>
   );
 }
 
