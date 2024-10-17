@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colorGrey,
   },
   button: {
-    borderRadius: 6,
+    borderRadius: 16,
     backgroundColor: theme.colorBlack,
     padding: 8,
   },

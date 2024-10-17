@@ -1,6 +1,8 @@
 import React from 'react'
 import { Alert, Text, TouchableOpacity, View } from 'react-native'
 import { styles } from '../styles'
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { theme } from '../theme';
 
 export const ShoppingListItem = ({ name, isCompleted }: { name: string, isCompleted?: boolean }) => {
 
@@ -25,7 +27,9 @@ export const ShoppingListItem = ({ name, isCompleted }: { name: string, isComple
         <View style={[styles.itemContainer, isCompleted ? styles.completeContainer : undefined]} >
             <Text style={[styles.textContainer, isCompleted ? styles.completeTextContainer : undefined]} >{name}!</Text>
             <TouchableOpacity style={[styles.button, isCompleted ? styles.completedButton : undefined]} onPress={handleDelete} activeOpacity={0.8} >
-                <Text style={styles.buttonText}>Delete</Text>
+
+                <AntDesign name="closecircle" size={24} color={isCompleted ? theme.colorWhite : theme.colorRed} />
+
             </TouchableOpacity>
         </View>
     )
