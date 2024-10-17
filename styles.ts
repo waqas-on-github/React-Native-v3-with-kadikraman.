@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colorWhite,
-    justifyContent: "center",
+    paddingTop: 12,
   },
 
   itemContainer: {
@@ -43,5 +43,14 @@ export const styles = StyleSheet.create({
     letterSpacing: 2,
     fontWeight: "bold",
     textTransform: "uppercase",
+  },
+  textInput: {
+    borderColor: theme.colorGreyLte,
+    borderWidth: 2,
+    padding: 12,
+    marginHorizontal: 12,
+    marginBottom: 12,
+    fontSize: 18,
+    borderRadius: 50,
   },
 });
