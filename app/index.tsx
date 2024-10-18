@@ -1,76 +1,102 @@
-
 import { FlatList, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
 import { styles } from '../styles';
 import { ShoppingListItem } from '../components/ShoppingListItem';
-import { useState } from 'react';
-
-
 
 type ShoppingListItemsType = {
-  id: string,
-  name: string
-
-}
-
-
+  id: string;
+  name: string;
+  completedAtTimeStamp?: number;
+  lastUpdatedTimestamp: number;
+};
 
 export default function App() {
-
-  const [text, setText] = useState('')
-  const [ShoppingList, setShoppingList] = useState<ShoppingListItemsType[]>([])
+  const [text, setText] = useState('');
+  const [shoppingList, setShoppingList] = useState<ShoppingListItemsType[]>([]);
 
   const handleSubmit = () => {
     if (text) {
-
       const newShoppingList = [
-        ...ShoppingList,
-        { id: new Date().toISOString(), name: text }
+        ...shoppingList,
+        { id: new Date().toISOString(), name: text, lastUpdatedTimestamp: Date.now() },
 
-      ]
-      setShoppingList(newShoppingList)
-      setText('')
-
+      ];
+      setShoppingList(newShoppingList);
+      setText('');
     }
-  }
+  };
+
+  const handleDelete = (id: string) => {
+    const newShoppingList = shoppingList.filter((item) => item.id !== id);
+    setShoppingList(newShoppingList);
+  };
+
+  const handleToggleComplete = (id: string) => {
+    const newShoppingList = shoppingList.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          completedAtTimeStamp: item.completedAtTimeStamp ? undefined : Date.now(),
+          lastUpdatedTimestamp: Date.now()
+        };
+      }
+      return item;
+    });
+    setShoppingList(newShoppingList);
+  };
 
 
-  const handleDelete = () => {
+  function orderShoppingList(shoppingList: ShoppingListItemsType[]) {
+    return shoppingList.sort((item1, item2) => {
+      if (item1.completedAtTimeStamp && item2.completedAtTimeStamp) {
+        return item2.completedAtTimeStamp - item1.completedAtTimeStamp;
+      }
 
+      if (item1.completedAtTimeStamp && !item2.completedAtTimeStamp) {
+        return 1;
+      }
 
+      if (!item1.completedAtTimeStamp && item2.completedAtTimeStamp) {
+        return -1;
+      }
+
+      if (!item1.completedAtTimeStamp && !item2.completedAtTimeStamp) {
+        return item2.lastUpdatedTimestamp - item1.lastUpdatedTimestamp;
+      }
+
+      return 0;
+    });
   }
 
   return (
-
     <FlatList
-      data={ShoppingList}
+      data={orderShoppingList(shoppingList)}
       style={styles.container}
-      contentContainerStyle={styles.contenteContainer}
-      stickyHeaderIndices={[0]}
-
+      contentContainerStyle={styles.contentContainer}
       ListHeaderComponent={
         <TextInput
-        style={styles.textInput}
-        placeholder='Coffe etc ...'
-        value={text}
-        onChangeText={(value) => setText(value)}
-        returnKeyType='done'
-        onSubmitEditing={handleSubmit}
-      // keyboardType=''  you can add keyboard type 
-        />}
+          style={styles.textInput}
+          placeholder="Add item..."
+          value={text}
+          onChangeText={setText}
+          onSubmitEditing={handleSubmit}
+          returnKeyType="done"
+        />
+      }
       ListEmptyComponent={
-        <View style={styles.listEmptyContainer} >
-          <Text  > your shopping list is empty</Text>
+        <View style={styles.listEmptyContainer}>
+          <Text>Your shopping list is empty</Text>
         </View>
       }
-      renderItem={(item) => <ShoppingListItem name={item.item.name} />}
-
+      renderItem={({ item }) => (
+        <ShoppingListItem
+          name={item.name}
+          id={item.id}
+          onDelete={() => handleDelete(item.id)}
+          onToggleComplete={() => handleToggleComplete(item.id)}
+          isCompleted={Boolean(item.completedAtTimeStamp)}
+        />
+      )}
     />
-
-
-
-
-  )
+  );
 }
-
-
-

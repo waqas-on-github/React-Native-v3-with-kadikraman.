@@ -4,58 +4,55 @@ import { theme } from "./theme";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colorWhite,
+    backgroundColor: theme.colors.colorWhite,
   },
-  contenteContainer: {
+  contentContainer: {
     paddingBottom: 24,
   },
   itemContainer: {
     borderBottomWidth: 1,
-    borderBottomColor: theme.colorCerulean,
-    paddingHorizontal: 8,
-    paddingVertical: 16,
+    borderBottomColor: theme.colors.colorCerulean,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  completeContainer: {
-    backgroundColor: theme.colorGreyLte,
-    borderBottomColor: theme.colorGreyLte,
+  completedItemContainer: {
+    backgroundColor: theme.colors.colorGreyLte,
+    borderBottomColor: theme.colors.colorGreyLte,
   },
-  textContainer: {
+  itemContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+  itemName: {
     fontSize: 18,
-    fontWeight: "400",
+    marginLeft: 8,
+    flex: 1,
   },
-  completeTextContainer: {
+  completedItemName: {
     textDecorationLine: "line-through",
-    color: theme.colorGrey,
+    color: theme.colors.colorGrey,
+  },
+  deleteButton: {
+    padding: 8,
+  },
+  completedDeleteButton: {
+    backgroundColor: theme.colors.colorGrey,
   },
   listEmptyContainer: {
     alignItems: "center",
-  },
-  completedButton: {
-    backgroundColor: theme.colorGrey,
-  },
-  button: {
-    borderRadius: 16,
-    backgroundColor: theme.colorBlack,
-    padding: 8,
-  },
-  buttonText: {
-    color: theme.colorWhite,
-    letterSpacing: 2,
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    marginTop: 24,
   },
   textInput: {
-    borderColor: theme.colorGreyLte,
-    backgroundColor: theme.colorWhite,
-    borderWidth: 2,
+    borderColor: theme.colors.colorGreyLte,
+    borderWidth: 1,
+    borderRadius: 8,
     padding: 12,
-    marginTop: 12,
-    marginHorizontal: 12,
-    marginBottom: 12,
-    fontSize: 18,
-    borderRadius: 50,
+    margin: 16,
+    fontSize: 16,
+    backgroundColor: theme.colors.colorWhite, // Added background color for better visibility
   },
 });
